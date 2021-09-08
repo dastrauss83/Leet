@@ -136,3 +136,105 @@ const longestCommonPrefix = (strs) => {
 
   return prefix;
 };
+
+//-------------------------------------------------------------------------
+//Valid Parenthesis (20)
+
+const isValid = (s) => {
+  if (s.length % 2 === 1) return false;
+
+  let stack = [];
+  let map = {
+    ")": "(",
+    "]": "[",
+    "}": "{",
+  };
+
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === "(" || s[i] === "[" || s[i] === "{") stack.push(s[i]);
+    else if (stack.pop() !== map[s[i]]) return false;
+  }
+
+  return stack.length < 1;
+};
+
+//-------------------------------------------------------------------------
+//Merge Two Sorted Lists (21)
+
+const mergeTwoLists = (l1, l2) => {
+  let temp = new ListNode(0, null);
+  let current = temp;
+
+  while (l1 && l2) {
+    if (l1.val < l2.val) {
+      current.next = l1;
+      l1 = l1.next;
+    } else {
+      current.next = l2;
+      l2 = l2.next;
+    }
+    current = current.next;
+  }
+
+  current.next = l1 ? l1 : l2;
+
+  return temp.next;
+};
+
+const mergeTwoLists = (l1, l2) => {
+  const convertToArray = (list) => {
+    if (!list) return [];
+    let array = [list.val];
+    while (list.next) {
+      array.push(list.next.val);
+      list = list.next;
+    }
+    return array;
+  };
+  return convertToArray(l1)
+    .concat(convertToArray(l2))
+    .sort((a, b) => b - a)
+    .reduce((acc, current) => new ListNode(current, acc), null);
+};
+
+//-------------------------------------------------------------------------
+//Remove Duplicates from Sorted Array (26)
+
+const removeDuplicates = (nums) => {
+  let i = 0;
+  while (i < nums.length - 1) {
+    if (nums[i] === nums[i + 1]) nums.splice(i, 1);
+    else i++;
+  }
+};
+
+//-------------------------------------------------------------------------
+//Remove Element (27)
+
+const removeElement = (nums, val) => {
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === val) {
+      nums.splice(i, 1);
+      i--;
+    }
+  }
+};
+
+const removeElement = (nums, val) => {
+  let i = nums.indexOf(val);
+  while (i !== -1) {
+    nums.splice(i, 1);
+    i = nums.indexOf(val);
+  }
+};
+
+const removeElement = (nums, val) => {
+  let index = 0;
+  for (let num of nums) {
+    if (num !== val) {
+      nums[index] = num;
+      index++;
+    }
+  }
+  return index;
+};
