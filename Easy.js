@@ -1,4 +1,8 @@
+//EASY on LeetCode
+
+//-------------------------------------------------------------------------
 //Two Sum (1)
+
 const twoSum = (nums, target) => {
   const map = {};
 
@@ -7,8 +11,10 @@ const twoSum = (nums, target) => {
     else map[target - nums[i]] = i;
   }
 };
+
 //-------------------------------------------------------------------------
 //Reverse Integer (7)
+
 const reverse = (x) => {
   let y = String(x).split("");
   if (y[0] === "-") y.push(y.shift());
@@ -53,3 +59,45 @@ const reverse = (x) => {
 
   return isNeg ? answer * -1 : answer;
 };
+
+//-------------------------------------------------------------------------
+//Palindrome Number (9)
+
+const isPalindrome = (x) => {
+  if (x < 0) return false;
+  x = String(x).split("");
+
+  for (let i = 0; i < x.length / 2; i++) {
+    if (x[i] !== x[x.length - i - 1]) return false;
+  }
+
+  return true;
+};
+
+const isPalindrome = (x) => {
+  if (x < 0) return false;
+  x = String(x).split("");
+
+  for (let i = 0; i < x.length / 2; i++) {
+    if (x.pop() !== x.shift()) return false;
+  }
+
+  return true;
+};
+
+const isPalindrome = (x) => {
+  if (x < 0) return false;
+  let compare = 0,
+    i = x;
+  while (i > 0) {
+    compare = compare * 10 + (i % 10);
+    i = Math.floor(i / 10);
+  }
+
+  return compare === x;
+};
+
+//-------------------------------------------------------------------------
+//Roman to Integer (13)
+
+const romanToInt = s;
