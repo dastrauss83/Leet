@@ -451,3 +451,70 @@ const merge = (nums1, m, nums2, n) => {
     nums1[m + n + 1] = nums1[m] > nums2[n] ? nums1[m--] : nums2[n--];
   }
 };
+
+//-------------------------------------------------------------------------
+//Binary Tree Inorder Traversal (94)
+
+const inorderTraversal = (root) => {
+  let answer = [];
+  let stack = [];
+
+  while (root || stack.length) {
+    if (root) {
+      stack.push(root);
+      root = root.left;
+    } else {
+      root = stack.pop();
+      answer.push(root.val);
+      root = root.right;
+    }
+  }
+
+  return answer;
+};
+
+//-------------------------------------------------------------------------
+//Same Tree (100)
+
+const isSameTree = (p, q) => {
+  if (!p && !q) return true;
+  let pStack = [];
+  let qStack = [];
+
+  while (p || q || pStack.length || qStack.length) {
+    if (p && q) {
+      pStack.push(p);
+      qStack.push(q);
+      p = p.left;
+      q = q.left;
+    } else if (!p && !q) {
+      p = pStack.pop();
+      q = qStack.pop();
+      if (p.val !== q.val) return false;
+      p = p.right;
+      q = q.right;
+    } else return false;
+  }
+
+  return true;
+};
+
+const isSameTree = (p, q) => {
+  let queue = [[p, q]];
+
+  while (queue.length) {
+    let [x, y] = queue.shift();
+    if (!x && !y) continue;
+    if (!x || !y) return false;
+    if (x.val !== y.val) return false;
+    queue.push([x.left, y.left]);
+    queue.push([x.right, y.right]);
+  }
+  return true;
+};
+
+const isSameTree = (p, q) => {
+  if (!p && !q) return true;
+  if (!p || !q || p.val !== q.val) return false;
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+};
