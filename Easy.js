@@ -238,3 +238,196 @@ const removeElement = (nums, val) => {
   }
   return index;
 };
+
+//-------------------------------------------------------------------------
+//strStr() (28)
+
+const strStr = (haystack, needle) => {
+  return haystack.indexOf(needle);
+};
+
+const strStr = (haystack, needle) => {
+  if (needle === "" || haystack === needle) return 0;
+  if (needle.length > haystack.length) return -1;
+
+  for (let i = 0; i < haystack.length - needle.length + 1; i++) {
+    if (haystack[i] === needle[0]) {
+      for (let j = 0; j < needle.length; j++) {
+        if (haystack[i + j] !== needle[j]) break;
+        else if (j === needle.length - 1) return i;
+      }
+    }
+  }
+  return -1;
+};
+
+//-------------------------------------------------------------------------
+//Search Insert Position (35)
+
+const searchInsert = (nums, target) => {
+  const binarySearch = (array, target, start, end) => {
+    if (start > end) return start;
+    const mid = Math.floor((end + start) / 2);
+    if (array[mid] === target) return mid;
+    if (array[mid] > target) return binarySearch(array, target, start, mid - 1);
+    if (array[mid] < target) return binarySearch(array, target, mid + 1, end);
+  };
+  return binarySearch(nums, target, 0, nums.length - 1);
+};
+
+const searchInsert = (nums, target) => {
+  let start = 0,
+    end = nums.length - 1;
+  while (start <= end) {
+    const mid = Math.floor((start + end) / 2);
+    if (nums[mid] === target) return mid;
+    if (nums[mid] > target) end = mid - 1;
+    if (nums[mid] < target) start = mid + 1;
+  }
+  return start;
+};
+
+//-------------------------------------------------------------------------
+//Maximum Subarray (53)
+
+const maxSubArray = (nums) => {
+  let max = nums[0];
+  let sum = 0;
+
+  for (num of nums) {
+    sum = Math.max(num, sum + num);
+    max = Math.max(sum, max);
+  }
+  return max;
+};
+
+//-------------------------------------------------------------------------
+//Length of Last Word (58)
+
+const lengthOfLastWord = (s) => {
+  s = s.split(" ");
+  for (let i = s.length - 1; i >= 0; i--) {
+    if (s[i] !== "") return s[i].length;
+  }
+  return 0;
+};
+
+const lengthOfLastWord = (s) => {
+  return s.split(" ").filter((word) => word !== "")[s.length - 1].length;
+};
+
+//-------------------------------------------------------------------------
+//Plus One (66)
+
+const plusOne = (digits) => {
+  if (digits[digits.length - 1] !== 9) {
+    digits[digits.length - 1]++;
+    return digits;
+  }
+
+  let index = digits.length - 1;
+  while (digits[index] === 9) {
+    if (index === 0) {
+      digits[index] = 0;
+      digits.unshift(0);
+    } else {
+      digits[index] = 0;
+      index--;
+    }
+  }
+  digits[index]++;
+  return digits;
+};
+
+const plusOne = (digits) => {
+  for (let i = digits.length - 1; i >= 0; i--) {
+    digits[i]++;
+    if (digits[i] > 9) digits[i] = 0;
+    else return digits;
+  }
+  digits.unshift(1);
+  return digits;
+};
+
+//-------------------------------------------------------------------------
+//Add Binary (67)
+
+const addBinary = (a, b) => {
+  const convertToNum = (s) => {
+    s = s.split("");
+    let length = s.length;
+    sum = 0;
+    for (let i = 0; i < length; i++) {
+      sum += s[i] * Math.pow(2, length - 1 - i);
+    }
+    return parseInt(sum);
+  };
+  const convertToBinary = (num) => {
+    if (num === 0) return "0";
+    let ans = [];
+    while (num > 0) {
+      ans.unshift(num % 2);
+      num = Math.floor(num / 2);
+    }
+    return ans.join("");
+  };
+  return convertToBinary(convertToNum(a) + convertToNum(b));
+};
+
+const addBinary = (a, b) => {
+  return (
+    parseInt(parseInt(a, 2).toString()) + parseInt(parseInt(b, 2).toString())
+  ).toString(2);
+};
+
+var addBinary = function (a, b) {
+  let first = "0b" + a;
+  let second = "0b" + b;
+  let sum = BigInt(first) + BigInt(second);
+  return sum.toString(2);
+};
+
+//-------------------------------------------------------------------------
+//Sqrt(x) (69)
+
+const mySqrt = (x) => {
+  if (x === 1) return 1;
+  let start = 0;
+  let end = Math.floor(x / 2) + 1;
+  while (start + 1 < end) {
+    const mid = Math.floor((start + end) / 2);
+    if (mid * mid <= x) start = mid;
+    if (mid * mid > x) end = mid;
+  }
+  return start;
+};
+
+//-------------------------------------------------------------------------
+//Climbing Stairs (70)
+
+const climbStairs = (n) => {
+  if (n <= 2) return n;
+  const map = { 1: 1, 2: 2 };
+  for (let i = 3; i <= n; i++) {
+    map[i] = map[i - 1] + map[i - 2];
+  }
+
+  return map[n];
+};
+
+//-------------------------------------------------------------------------
+//Remove Duplicates from Sorted Array (83)
+
+const deleteDuplicates = (head) => {
+  let current = head;
+  while (current && current.next) {
+    if (current.val === current.next.val) current.next = current.next.next;
+    else current = current.next;
+  }
+  return head;
+};
+
+//-------------------------------------------------------------------------
+//Merge Sorted Array (88)
+
+const merge = (nums1, m, nums2, n) => {};
