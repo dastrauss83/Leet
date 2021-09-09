@@ -518,3 +518,77 @@ const isSameTree = (p, q) => {
   if (!p || !q || p.val !== q.val) return false;
   return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
 };
+
+//-------------------------------------------------------------------------
+//Symmetric Tree (101)
+
+const isSymmetric = (root) => {
+  if (!root) return true;
+  let l = root.left;
+  let r = root.right;
+  let queue = [[l, r]];
+  while (queue.length) {
+    const [x, y] = queue.shift();
+    if (!x && !y) continue;
+    if (!x || !y || x.val !== y.val) return false;
+    queue.push([x.left, y.right], [x.right, y.left]);
+  }
+
+  return true;
+};
+
+const isSymmetric = (root) => {
+  const isMirror = (l, r) => {
+    if (!l && !r) return true;
+    if (!l || !r || l.val !== r.val) return false;
+    return isMirror(l.left, r.right) && isMirror(l.right, r.left);
+  };
+  return isMirror(root.left, root.right);
+};
+
+//-------------------------------------------------------------------------
+//Maximum Depth of Binary Tree (104)
+
+const maxDepth = (root) => {
+  if (!root) return 0;
+  let depth = 0;
+  let q = [root];
+  while (q.length) {
+    const qLevel = [];
+    for (let node of q) {
+      if (node.right) qLevel.push(node.right);
+      if (node.left) qLevel.push(node.left);
+    }
+    q = qLevel;
+    depth++;
+  }
+  return depth;
+};
+
+const maxDepth = (root) => {
+  return !root ? 0 : Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+};
+
+//-------------------------------------------------------------------------
+//Convert Sorted Array to Binary Search Tree (108)
+
+const sortedArrayToBST = (nums) => {
+  if (!nums) return null;
+  const helper = (nums, start, end) => {
+    if (end < start) return null;
+
+    const mid = Math.floor((start + end) / 2);
+    const node = new TreeNode(nums[mid]);
+
+    node.left = helper(nums, start, mid - 1);
+    node.right = helper(nums, mid + 1, end);
+
+    return node;
+  };
+  return helper(nums, 0, nums.length - 1);
+};
+
+//-------------------------------------------------------------------------
+//Balanced Binary Tree (110)
+
+const isBalanced = (root) => {};
