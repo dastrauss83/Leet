@@ -591,4 +591,6 @@ const sortedArrayToBST = (nums) => {
 //-------------------------------------------------------------------------
 //Balanced Binary Tree (110)
 
-const isBalanced = (root) => {};
+const isBalanced = (root) => {
+  const getHeight = (node) => {};
+};
