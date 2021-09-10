@@ -14,7 +14,7 @@
 ]; // Last is index M
 
 const superEggDrop = (eggs, floors) => {
-  let M = 200;
+  let M = 200; // Large num
   const dp = Array.from({ length: M + 1 }, () => Array(eggs + 1).fill(0));
 
   for (let i = 1; i < M + 1; i++) {
