@@ -597,4 +597,9 @@ const isBalanced = (root) => {
     if (!node) return 0;
     return Math.max(getHeight(node.left), getHeight(node.right)) + 1;
   };
+  return (
+    Math.abs(getHeight(root.left) - getHeight(root.right)) < 2 &&
+    isBalanced(root.left) &&
+    isBalanced(root.right)
+  );
 };
