@@ -24,3 +24,7 @@ const superEggDrop = (eggs, floors) => {
     }
   }
 };
+
+//-------------------------------------------------------------------------
+//Median of Two Sorted Arrays (4)
+const findMedianSortedArrays = (nums1, nums2) => {};
