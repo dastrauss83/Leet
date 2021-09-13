@@ -1,4 +1,4 @@
-//Hard on LeetCode
+//Medium on LeetCode
 
 //-------------------------------------------------------------------------
 //Add Two Numbers (2)
@@ -195,4 +195,53 @@ const searchRange = (nums, target) => {
     end--;
   }
   return [start, end];
+};
+
+//-------------------------------------------------------------------------
+//Longest Palindromic Substring (5)
+
+const longestPalindrome = (s) => {
+  const isPalindrome = (s, i) => {
+    return (
+      (i = i || 0) < 0 ||
+      i >= s.length >> 1 ||
+      (s[i] == s[s.length - 1 - i] && isPalindrome(s, ++i))
+    );
+  };
+
+  let max = [0, 0];
+
+  for (let i = 0; i < s.length; i++) {
+    for (let j = i; j < s.length; j++) {
+      if (isPalindrome(s.substring(i, j + 1))) {
+        if (j - i > max[1] - max[0]) {
+          max = [i, j];
+        }
+      }
+    }
+  }
+
+  return s.substring(max[0], max[1] + 1);
+};
+
+const longestPalindrome = (s) => {
+  let longest = "";
+
+  const expandAroundCenter = (s, l, r) => {
+    while (l >= 0 && r < s.length && s[l] === s[r]) {
+      l--;
+      r++;
+    }
+    return s.slice(i + 1, j);
+  };
+
+  for (let i = 0; i < s.length; i++) {
+    let len1 = expandAroundCenter(s, i, i);
+    let len2 = expandAroundCenter(s, i, i + 1);
+    let longerPalindrome = len1.length > len2.length ? len1 : len2;
+    if (longerPalindrome.length > longest.length) {
+      longest = longerPalindrome;
+    }
+  }
+  return longest;
 };
