@@ -151,44 +151,19 @@ const searchRange = (nums, target) => {
     let mid = Math.floor((start + end) / 2);
 
     if (nums[mid] === target) {
-      let index = mid;
-      if (index - 1 >= 0 && nums[index - 1] === target) {
-        while (nums[index - 1] === target) {
-          index--;
+      let start = mid;
+      if (start !== 0) {
+        while (start - 1 >= 0 && nums[start - 1] === target) {
+          start--;
         }
-        return [index, mid];
       }
-      if (index + 1 <= nums.length - 1 && nums[index + 1] === target) {
-        while (nums[index + 1] === target) {
-          index++;
+      let end = mid;
+      if (end !== nums.length - 1) {
+        while (end + 1 <= nums.length - 1 && nums[end + 1] === target) {
+          end++;
         }
-        return [mid, index];
       }
-      return [mid, mid];
-
-      // if (mid >= 0 && nums[mid - 1] === target) {
-      //   let index = mid - 1;
-      //   while (index >= 0 && nums[index] === target) {
-      //     index--;
-      //   }
-      //   if (index === -1) {
-      //     return [mid, mid];
-      //   } else {
-      //     return [index + 1, mid];
-      //   }
-      // } else if (mid < nums.length && nums[mid + 1] === target) {
-      //   let index = mid + 1;
-      //   while (index < nums.length && nums[index] === target) {
-      //     index++;
-      //   }
-      //   if (index === nums.length) {
-      //     return [mid, mid];
-      //   } else {
-      //     return [mid, index - 1];
-      //   }
-      // } else {
-      //   return [mid, mid];
-      // }
+      return [start, end];
     }
 
     if (nums[mid] > target) {
@@ -201,4 +176,23 @@ const searchRange = (nums, target) => {
   }
 
   return [-1, -1];
+};
+
+const searchRange = (nums, target) => {
+  let start = nums.indexOf(target);
+  let end = nums.lastIndexOf(target);
+  return [start, end];
+};
+
+const searchRange = (nums, target) => {
+  let start = 0;
+  while (start <= nums.length - 1 && nums[start] !== target) {
+    start++;
+  }
+  if (start === nums.length - 1) return [-1, -1];
+  let end = nums.length - 1;
+  while (end >= 0 && nums[end] !== target) {
+    end--;
+  }
+  return [start, end];
 };
