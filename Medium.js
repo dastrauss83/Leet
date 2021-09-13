@@ -140,3 +140,34 @@ const merge = (intervals) => {
 
 //-------------------------------------------------------------------------
 //Find First and Last Position of Element in Sorted Array (34)
+
+const searchRange = (nums, target) => {
+  if (nums.length < 2) return [-1, -1];
+
+  let start = 0;
+  let end = nums.length - 1;
+
+  while (start <= end) {
+    let mid = Math.floor((start + end) / 2);
+
+    if (nums[mid] === target) {
+      if (mid > 0 && nums[mid - 1] === target) {
+        return [mid - 1, mid];
+      } else if (mid < nums.length - 1 && nums[mid + 1] === target) {
+        return [mid, mid + 1];
+      } else {
+        return [mid, -1];
+      }
+    }
+
+    if (nums[mid] > target) {
+      end = mid - 1;
+    }
+
+    if (nums[mid] < target) {
+      start = mid + 1;
+    }
+  }
+
+  return [-1, -1];
+};
