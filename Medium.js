@@ -99,3 +99,41 @@ const lengthOfLongestSubstring = (s) => {
 
   return max;
 };
+
+//-------------------------------------------------------------------------
+//Subsets (78)
+
+const subsets = (nums) => {
+  const answer = [];
+
+  const helper = (path, index) => {
+    answer.push(path);
+    for (let i = index; i < nums.length; i++) {
+      helper([...path, nums[i]], i + 1);
+    }
+  };
+  helper([], 0);
+
+  return answer;
+};
+
+//-------------------------------------------------------------------------
+//Merge Intervals (56)
+
+const merge = (intervals) => {
+  intervals.sort((a, b) => a[0] - b[0]);
+  const answer = [];
+
+  for (let i = 0; i < intervals.length; i++) {
+    if (answer.length === 0 || answer[answer.length - 1][1] < intervals[i][0]) {
+      answer.push(intervals[i]);
+    } else {
+      answer[answer.length - 1][1] = Math.max(
+        answer[answer.length - 1][1],
+        intervals[i][1]
+      );
+    }
+  }
+
+  return answer;
+};
