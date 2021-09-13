@@ -137,3 +137,6 @@ const merge = (intervals) => {
 
   return answer;
 };
+
+//-------------------------------------------------------------------------
+//Find First and Last Position of Element in Sorted Array (34)
