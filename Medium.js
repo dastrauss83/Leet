@@ -267,18 +267,15 @@ const rob = (nums) => {
   if (nums.length === 1) return nums[0];
   if (nums.length === 2) return Math.max(nums[0], nums[1]);
 
-  const helper = (nums, start, end) => {
-    const dp = [0, nums[start]];
-    for (let i = 1; i < end; i++) {
-      dp[i + 1] = Math.max(dp[i], dp[i - 1] + nums[i + start]);
+  const helper = (nums) => {
+    let dp = [0, nums[0]];
+    for (let i = 1; i < nums.length; i++) {
+      dp[i + 1] = Math.max(dp[i], dp[i - 1] + nums[i]);
     }
-    return dp[nums.length - 1];
+    return dp[nums.length];
   };
 
-  return Math.max(
-    helper(nums, 0, nums.length - 1),
-    helper(nums, 1, nums.length)
-  );
+  return Math.max(helper(nums.slice(1)), helper(nums.slice(0, -1)));
 };
 
 //-------------------------------------------------------------------------
@@ -294,10 +291,10 @@ const deleteAndEarn = (nums) => {
     else numsLookup[num] = num;
   }
 
-  const dp = [0, numsLookup[1]];
-  for (let i = 2; i < numsLookup.length; i++) {
-    dp[i] = Math.max(dp[i - 1], dp[i - 2] + numsLookup[i]);
+  const dp = [0, numsLookup[0]];
+  for (let i = 1; i < numsLookup.length; i++) {
+    dp[i + 1] = Math.max(dp[i], dp[i - 1] + numsLookup[i]);
   }
 
-  return dp[numsLookup.length - 1];
+  return dp[numsLookup.length];
 };
