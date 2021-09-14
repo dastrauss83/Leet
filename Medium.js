@@ -313,3 +313,20 @@ const canJump = (nums) => {
   }
   return true;
 };
+
+//-------------------------------------------------------------------------
+//Jump Game 2 (45)
+
+const jump = (nums) => {
+  let maxIndex = 0;
+  let jumps = 0;
+  let curEnd = 0;
+  for (let i = 0; i < nums.length - 1; i++) {
+    maxIndex = Math.max(maxIndex, i + nums[i]);
+    if (i == curEnd) {
+      jumps++;
+      curEnd = maxIndex;
+    }
+  }
+  return jumps;
+};
