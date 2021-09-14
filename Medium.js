@@ -288,17 +288,16 @@ const deleteAndEarn = (nums) => {
   if (nums.length === 0) return 0;
   if (nums.length === 1) return nums[0];
 
-  const numsLookup = new Array(1000).fill(0);
+  const numsLookup = new Array(10001).fill(0);
   for (let num of nums) {
-    numsLookup[num]++;
+    if (numsLookup[num]) numsLookup[num] += num;
+    else numsLookup[num] = num;
   }
-  console.log(numsLookup);
 
   const dp = [0, numsLookup[1]];
-
-  for (let i = 1; i < numsLookup.length; i++) {
-    dp[i - 1] = Math.max(dp[i - 2] + dp[i] * i, dp[i - 1]);
+  for (let i = 2; i < numsLookup.length; i++) {
+    dp[i] = Math.max(dp[i - 1], dp[i - 2] + numsLookup[i]);
   }
 
-  return dp[nums.length - 1];
+  return dp[numsLookup.length - 1];
 };
