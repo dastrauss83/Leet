@@ -330,3 +330,25 @@ const jump = (nums) => {
   }
   return jumps;
 };
+
+//-------------------------------------------------------------------------
+//Maximum Sum Circular Subarray (918)
+
+const maxSubarraySumCircular = (nums) => {
+  let max = nums[0];
+  let maxSum = 0;
+  let min = nums[0];
+  let minSum = 0;
+  let total = 0;
+
+  for (let num of nums) {
+    maxSum = Math.max(maxSum + num, num);
+    max = Math.max(max, maxSum);
+
+    minSum = Math.min(minSum + num, num);
+    min = Math.min(min, minSum);
+
+    total += num;
+  }
+  return total === min ? max : Math.max(max, total - min);
+};
