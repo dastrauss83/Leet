@@ -633,3 +633,30 @@ const tribonacci = (n) => {
   }
   return memo[n];
 };
+
+//-------------------------------------------------------------------------
+//Min Cost Climbing Stairs (746)
+
+const minCostClimbingStairs = (cost) => {
+  let f1 = 0;
+  let f2 = 0;
+
+  for (let i = 0; i < cost.length; i++) {
+    let f0 = cost[i] + Math.min(f1, f2);
+    f2 = f1;
+    f1 = f0;
+  }
+
+  return Math.min(f1, f2);
+};
+
+const minCostClimbingStairs = (cost) => {
+  let step1 = 0;
+  let step2 = 0;
+  for (let i = 0; i < cost.length; i++) {
+    let currentStep = cost[i] + Math.min(step1, step2);
+    step2 = step1;
+    step1 = currentStep;
+  }
+  return Math.min(step1, step2);
+};

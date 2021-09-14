@@ -232,7 +232,7 @@ const longestPalindrome = (s) => {
       l--;
       r++;
     }
-    return s.slice(i + 1, j);
+    return s.slice(l + 1, r);
   };
 
   for (let i = 0; i < s.length; i++) {
@@ -244,4 +244,61 @@ const longestPalindrome = (s) => {
     }
   }
   return longest;
+};
+
+//-------------------------------------------------------------------------
+//House Robber (198)
+
+const rob = (nums) => {
+  const dp = []; //of length nums.length + 1 (for the 0th time)
+  dp[0] = 0;
+  dp[1] = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    dp[i + 1] = Math.max(dp[i], dp[i - 1] + nums[i]);
+  }
+  return dp[nums.length];
+};
+
+//-------------------------------------------------------------------------
+//House Robber 2 (213)
+
+const rob = (nums) => {
+  if (nums.length === 0) return 0;
+  if (nums.length === 1) return nums[0];
+  if (nums.length === 2) return Math.max(nums[0], nums[1]);
+
+  const helper = (nums, start, end) => {
+    const dp = [0, nums[start]];
+    for (let i = 1; i < end; i++) {
+      dp[i + 1] = Math.max(dp[i], dp[i - 1] + nums[i + start]);
+    }
+    return dp[nums.length - 1];
+  };
+
+  return Math.max(
+    helper(nums, 0, nums.length - 1),
+    helper(nums, 1, nums.length)
+  );
+};
+
+//-------------------------------------------------------------------------
+//Delete and Earn (740)
+
+const deleteAndEarn = (nums) => {
+  if (nums.length === 0) return 0;
+  if (nums.length === 1) return nums[0];
+
+  const numsLookup = new Array(1000).fill(0);
+  for (let num of nums) {
+    numsLookup[num]++;
+  }
+  console.log(numsLookup);
+
+  const dp = [0, numsLookup[1]];
+
+  for (let i = 1; i < numsLookup.length; i++) {
+    dp[i - 1] = Math.max(dp[i - 2] + dp[i] * i, dp[i - 1]);
+  }
+
+  return dp[nums.length - 1];
 };
