@@ -660,3 +660,108 @@ const minCostClimbingStairs = (cost) => {
   }
   return Math.min(step1, step2);
 };
+
+//-------------------------------------------------------------------------
+//Counting Bits (338)
+
+//doesn't work for large nums
+const countBits = (n) => {
+  if (n === 0) return 0;
+  const ans = [];
+
+  for (let i = 0; i <= n; i++) {
+    ans.push(
+      i
+        .toString(2)
+        .split("")
+        .reduce((acc, current) => {
+          if (current === "1") return acc + 1;
+          else return acc;
+        }, 0)
+    );
+  }
+
+  return ans;
+};
+
+const countBits = (n) => {
+  const result = [0];
+  let offset = 1;
+  for (let index = 1; index <= n; index++) {
+    if (offset * 2 === index) offset *= 2;
+    result[index] = result[index - offset] + 1;
+  }
+  return result;
+};
+
+//-------------------------------------------------------------------------
+//Diameter of a Binary Tree (543)
+
+const diameterOfBinaryTree = (root) => {
+  let max = 0;
+
+  const getHeight = (node) => {
+    if (!node) return 0;
+
+    let left = getHeight(node.left);
+    let right = getHeight(node.right);
+
+    max = Math.max(max, left + right);
+    return Math.max(left, right) + 1;
+  };
+
+  getHeight(root);
+  return max;
+};
+
+//-------------------------------------------------------------------------
+//Merge Two Binary Trees (617)
+
+const mergeTrees = (root1, root2) => {
+  if (!root1) return root2;
+  if (!root2) return root1;
+
+  root1.val += root2.val;
+
+  root1.left = mergeTrees(root1.left, root2.left);
+  root1.right = mergeTrees(root1.right, root2.right);
+
+  return root1;
+};
+
+const mergeTrees = (root1, root2) => {
+  if (root1 && root2) {
+    let root = new TreeNode(root1.val + root2.val);
+    root.left = mergeTrees(root1.left, root2.left);
+    root.right = mergeTrees(root1.right, root2.right);
+    return root;
+  }
+  return root1 || root2;
+};
+
+const mergeTrees = (root1, root2) => {
+  if (!root1) return root2;
+  if (!root2) return root1;
+
+  let queue1 = [root1];
+  let queue2 = [root2];
+
+  while (queue1.length) {
+    let current1 = queue1.shift();
+    let current2 = queue2.shift();
+
+    if (!current1) continue;
+
+    if (current1 && current2) {
+      if (current1 !== current2) current2.val += current1.val;
+      if (!current2.left) current2.left = current1.left;
+      if (!current2.right) current2.right = current1.right;
+    }
+
+    queue1.push(current1.left);
+    queue1.push(current1.right);
+    queue2.push(current2.left);
+    queue2.push(current2.right);
+  }
+  return root2;
+};

@@ -342,13 +342,13 @@ const maxSubarraySumCircular = (nums) => {
   let total = 0;
 
   for (let num of nums) {
-    maxSum = Math.max(maxSum + num, num);
+    maxSum = Math.max(maxSum + num, num); //Kadane's algorithm to keep both a min and max subarray value
     max = Math.max(max, maxSum);
 
     minSum = Math.min(minSum + num, num);
     min = Math.min(min, minSum);
 
-    total += num;
-  }
-  return total === min ? max : Math.max(max, total - min);
+    total += num; // keeping a total to later use with the min to determine the wrapping portion
+  } // if total === min then every value is negative and you should return the max (largest negative value)
+  return total === min ? max : Math.max(max, total - min); //otherwise return max(unwrapped maximum) or total - min (wrapped maximum)
 };
