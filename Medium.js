@@ -298,3 +298,18 @@ const deleteAndEarn = (nums) => {
 
   return dp[numsLookup.length];
 };
+
+//-------------------------------------------------------------------------
+//Jump Game (55)
+
+const canJump = (nums) => {
+  if (nums.length === 1) return true;
+
+  let maxIndex = 0;
+  for (let i = 0; i < nums.length; i++) {
+    maxIndex = Math.max(maxIndex, i + nums[i]);
+    if (maxIndex === nums.length - 1) return true;
+    if (i >= maxIndex) return false;
+  }
+  return true;
+};
