@@ -141,6 +141,22 @@ const longestCommonPrefix = (strs) => {
 
 const isValid = (s) => {
   if (s.length % 2 === 1) return false;
+  let map = {
+    ")": "(",
+    "]": "[",
+    "}": "{",
+  };
+  let stack = [];
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === ")" || s[i] === "]" || s[i] === "}") {
+      if (stack.pop() !== map[s[i]]) return false;
+    } else stack.push(s[i]);
+  }
+  return stack.length < 1;
+};
+
+const isValid = (s) => {
+  if (s.length % 2 === 1) return false;
 
   let stack = [];
   let map = {
@@ -406,12 +422,13 @@ const mySqrt = (x) => {
 
 const climbStairs = (n) => {
   if (n <= 2) return n;
-  const map = { 1: 1, 2: 2 };
+
+  const dp = { 1: 1, 2: 2 };
   for (let i = 3; i <= n; i++) {
-    map[i] = map[i - 1] + map[i - 2];
+    dp[i] = dp[i - 1] + dp[i - 2];
   }
 
-  return map[n];
+  return dp[n];
 };
 
 //-------------------------------------------------------------------------
@@ -533,6 +550,18 @@ const isSymmetric = (root) => {
     queue.push([x.left, y.right], [x.right, y.left]);
   }
 
+  return true;
+};
+
+const isSymmetric = (root) => {
+  if (!root) return true;
+  let stack = [[root.left, root.right]];
+  while (stack.length) {
+    let [x, y] = stack.shift();
+    if (!x && !y) continue;
+    if (!x || !y || x.val !== y.val) return false;
+    stack.push([x.left, y.right], [x.right, y.left]);
+  }
   return true;
 };
 
