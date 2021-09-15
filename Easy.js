@@ -849,3 +849,33 @@ const isPalindrome = (head) => {
 
   return true;
 };
+
+//-------------------------------------------------------------------------
+//Valid Anagram (242)
+
+//JS heavy
+const isAnagram = (s, t) => {
+  s = s.split("").sort();
+  t = t.split("").sort();
+
+  if (s.length !== t.length) return false;
+
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] !== t[i]) return false;
+  }
+  return true;
+};
+
+const isAnagram = (s, t) => {
+  if (s.length !== t.length) return false;
+
+  let map = {};
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] in map) map[s[i]]++;
+    else map[s[i]] = 1;
+    if (t[i] in map) map[t[i]]--;
+    else map[t[i]] = -1;
+  }
+
+  return Object.values(map).filter((a) => a !== 0).length === 0;
+};

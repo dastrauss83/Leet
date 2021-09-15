@@ -433,7 +433,7 @@ const threeSum = (nums) => {
         results.push([nums[start], nums[middle], nums[end]]);
 
         while (nums[middle] === nums[middle + 1]) middle++;
-        while (nums[end] === nums[end + 1]) end++;
+        while (nums[end] === nums[end + 1]) end--;
 
         middle++;
         end--;
