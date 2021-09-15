@@ -790,4 +790,34 @@ const mergeTrees = (root1, root2) => {
 //-------------------------------------------------------------------------
 //Palindrome Linked List (234)
 
-const isPalindrome = (head) => {};
+const isPalindrome = (head) => {
+  let slow = head,
+    fast = head;
+
+  while (fast && fast.next) {
+    fast = fast.next.next;
+    slow = slow.next;
+  }
+
+  const reverse = (node) => {
+    let temp, prev;
+
+    while (node) {
+      temp = node.next;
+      node.next = prev;
+      prev = node;
+      node = temp;
+    }
+    return prev;
+  };
+
+  slow = reverse(slow);
+
+  while (slow) {
+    if (slow.val !== head.val) return false;
+    slow = slow.next;
+    head = head.next;
+  }
+
+  return true;
+};
