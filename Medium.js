@@ -64,14 +64,14 @@ const addTwoNumbers = (l1, l2) => {
 //Longest Substring Without Repeating Characters (3)
 
 const lengthOfLongestSubstring = (s) => {
-  if (!s || !s.length) return 0;
-  s = s.split("");
+  if (!s.length) return 0;
+  s.split("");
   let max = 0;
   for (let i = 0; i < s.length; i++) {
     let map = {};
     let count = 0;
     for (let j = i; j < s.length; j++) {
-      if (!map.hasOwnProperty(s[j])) {
+      if (!(s[j] in map)) {
         count++;
         map[s[j]] = true;
       } else {
@@ -84,6 +84,25 @@ const lengthOfLongestSubstring = (s) => {
   return max;
 };
 
+const lengthOfLongestSubstring = (s) => {
+  if (!s.length) return 0;
+  const map = {};
+  let max = 0;
+  let left = 0;
+  let right = 0;
+  while (right < s.length) {
+    let rightChar = s[right];
+    if (rightChar in map && map[rightChar] >= left && map[rightChar] < right) {
+      left = map[rightChar] + 1;
+    }
+    max = Math.max(max, right - left + 1);
+    map[rightChar] = right;
+    right++;
+  }
+  return max;
+};
+
+//JS heavy
 const lengthOfLongestSubstring = (s) => {
   let curr = [];
   let max = 0;
