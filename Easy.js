@@ -743,25 +743,51 @@ const mergeTrees = (root1, root2) => {
   if (!root1) return root2;
   if (!root2) return root1;
 
-  let queue1 = [root1];
-  let queue2 = [root2];
+  let queue = [[root1, root2]];
 
-  while (queue1.length) {
-    let current1 = queue1.shift();
-    let current2 = queue2.shift();
+  while (queue.length) {
+    let [current1, current2] = queue.shift();
 
-    if (!current1) continue;
+    if (!current2) continue;
 
     if (current1 && current2) {
-      if (current1 !== current2) current2.val += current1.val;
-      if (!current2.left) current2.left = current1.left;
-      if (!current2.right) current2.right = current1.right;
+      if (current1 !== current2) current1.val += current2.val;
+      if (!current1.left) current1.left = current2.left;
+      if (!current1.right) current1.right = current2.right;
     }
 
-    queue1.push(current1.left);
-    queue1.push(current1.right);
-    queue2.push(current2.left);
-    queue2.push(current2.right);
+    queue.push(
+      [current1.left, current2.left],
+      [current1.right, current2.right]
+    );
   }
-  return root2;
+  return root1;
 };
+
+const mergeTrees = (root1, root2) => {
+  if (!root1) return root2;
+  if (!root2) return root1;
+
+  let stack = [[root1, root2]];
+
+  while (stack.length) {
+    let [current1, current2] = stack.pop();
+
+    if (!current1 || !current2) continue;
+
+    current1.val += current2.val;
+
+    if (!current1.left) current1.left = current2.left;
+    else stack.push([current1.left, current2.left]);
+
+    if (!current1.right) current1.right = current2.right;
+    else stack.push([current1.right, current2.right]);
+  }
+
+  return root1;
+};
+
+//-------------------------------------------------------------------------
+//Palindrome Linked List (234)
+
+const isPalindrome = (head) => {};

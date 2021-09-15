@@ -352,3 +352,75 @@ const maxSubarraySumCircular = (nums) => {
   } // if total === min then every value is negative and you should return the max (largest negative value)
   return total === min ? max : Math.max(max, total - min); //otherwise return max(unwrapped maximum) or total - min (wrapped maximum)
 };
+
+//-------------------------------------------------------------------------
+//Container With Most Water (11)
+
+const maxArea = (height) => {
+  let maxArea = 0;
+
+  for (let i = 0; i < height.length; i++) {
+    for (let j = i + 1; j < height.length; j++) {
+      let width = j - i;
+      let tall = height[i] > height[j] ? height[j] : height[i];
+      maxArea = Math.max(maxArea, width * tall);
+    }
+  }
+
+  return maxArea;
+};
+
+const maxArea = (height) => {
+  let start = 0;
+  let end = height.length - 1;
+
+  const area = (array, beg, aft) => {
+    return Math.min(array[beg], array[aft]) * (aft - beg);
+  };
+
+  let max = area(height, start, end);
+
+  while (start < end) {
+    if (height[start] <= height[end]) start++;
+    else if (height[start] > height[end]) end--;
+
+    max = Math.max(max, area(height, start, end));
+  }
+
+  return max;
+};
+
+//-------------------------------------------------------------------------
+//3Sum (15)
+
+const threeSum = (nums) => {
+  if (nums.length < 3) return [];
+
+  const results = [];
+  nums.sort((a, b) => a - b);
+
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] > 0) break;
+    if (i > 0 && nums[i] === nums[i - 1]) continue;
+
+    let start = i;
+    let middle = i + 1;
+    let end = nums.length - 1;
+
+    while (middle < end) {
+      let sum = nums[start] + nums[middle] + nums[end];
+
+      if (sum === 0) {
+        results.push([nums[start], nums[middle], nums[end]]);
+
+        while (nums[middle] === nums[middle + 1]) middle++;
+        while (nums[end] === nums[end + 1]) end++;
+
+        middle++;
+        end--;
+      } else if (sum < 0) middle++;
+      else if (sum > 0) end--;
+    }
+  }
+  return results;
+};
