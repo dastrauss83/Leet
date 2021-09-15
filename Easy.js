@@ -4,11 +4,10 @@
 //Two Sum (1)
 
 const twoSum = (nums, target) => {
-  const map = {};
-
+  let map = {};
   for (let i = 0; i < nums.length; i++) {
-    if (map.hasPropertyOf(nums[i])) return [nums[i], map[nums[i]]];
-    else map[target - nums[i]] = i;
+    if (nums[i] in map) return [map[nums[i]], i];
+    map[target - nums[i]] = i;
   }
 };
 
