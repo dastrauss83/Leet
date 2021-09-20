@@ -579,6 +579,8 @@ UndergroundSystem.prototype.getAverageTime = function (
 ) {
   journey = `${startStation}-${endStation}`;
 
+  if (!(journey in this.trips)) return 0;
+
   totalTime = this.trips[journey]["totalTime"];
   totalTrips = this.trips[journey]["totalTrips"];
 
