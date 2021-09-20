@@ -518,3 +518,77 @@ const spiralOrder = (matrix) => {
 
   return result;
 };
+
+//-------------------------------------------------------------------------
+//Design Underground System (1396)
+
+const UndergroundSystem = function () {
+  this.traveling = {};
+  this.trips = {};
+};
+
+/**
+ * @param {number} id
+ * @param {string} stationName
+ * @param {number} t
+ * @return {void}
+ */
+UndergroundSystem.prototype.checkIn = function (id, stationName, t) {
+  this.traveling[id] = {
+    startStation: stationName,
+    startTime: t,
+  };
+};
+
+/**
+ * @param {number} id
+ * @param {string} stationName
+ * @param {number} t
+ * @return {void}
+ */
+UndergroundSystem.prototype.checkOut = function (id, stationName, t) {
+  startStation = this.traveling[id]["startStation"];
+  endStation = stationName;
+  journey = `${startStation}-${endStation}`;
+
+  startTime = this.traveling[id]["startTime"];
+  endTime = t;
+  travelTime = endTime - startTime;
+
+  if (journey in this.trips) {
+    this.trips[journey]["totalTime"] += travelTime;
+    this.trips[journey]["totalTrips"]++;
+  } else {
+    this.trips.journey = {
+      totalTime: travelTime,
+      totalTrips: 1,
+    };
+  }
+
+  delete this.traveling.id;
+};
+
+/**
+ * @param {string} startStation
+ * @param {string} endStation
+ * @return {number}
+ */
+UndergroundSystem.prototype.getAverageTime = function (
+  startStation,
+  endStation
+) {
+  journey = `${startStation}-${endStation}`;
+
+  totalTime = this.trips[journey]["totalTime"];
+  totalTrips = this.trips[journey]["totalTrips"];
+
+  return totalTime / totalTrips;
+};
+
+/**
+ * Your UndergroundSystem object will be instantiated and called as such:
+ * var obj = new UndergroundSystem()
+ * obj.checkIn(id,stationName,t)
+ * obj.checkOut(id,stationName,t)
+ * var param_3 = obj.getAverageTime(startStation,endStation)
+ */
