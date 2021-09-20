@@ -877,5 +877,29 @@ const isAnagram = (s, t) => {
     else map[t[i]] = -1;
   }
 
-  return Object.values(map).filter((a) => a !== 0).length === 0;
+  for (let value of Object.values(map)) {
+    if (value !== 0) return false;
+  }
+
+  return true;
+};
+
+//-------------------------------------------------------------------------
+//Pascal's Triangle (118)
+
+const generate = (numRows) => {
+  const result = [[1]];
+
+  for (let i = 1; i < numRows; i++) {
+    let row = [1];
+
+    while (row.length < i) {
+      row.push(result[i - 1][row.length - 1] + result[i - 1][row.length]);
+    }
+
+    row.push(1);
+    result.push(row);
+  }
+
+  return result;
 };

@@ -443,3 +443,78 @@ const threeSum = (nums) => {
   }
   return results;
 };
+
+//-------------------------------------------------------------------------
+//Spiral Matrix (54)
+
+const spiralOrder = (matrix) => {
+  let ans = [];
+
+  const removeEmpty = (array) => {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].length === 0) array = array.splice(i, 1);
+    }
+    return array;
+  };
+
+  while (matrix.length) {
+    matrix = removeEmpty(matrix);
+    ans = ans.concat(matrix.shift());
+
+    for (let i = 0; i < matrix.length; i++) {
+      ans.push(matrix[i].pop());
+    }
+    matrix = removeEmpty(matrix);
+
+    if (!matrix[matrix.length - 1]) break;
+    while (matrix[matrix.length - 1].length) {
+      ans.push(matrix[matrix.length - 1].pop());
+    }
+    matrix.pop();
+    matrix = removeEmpty(matrix);
+
+    for (let i = matrix.length - 1; i >= 0; i--) {
+      ans.push(matrix[i].shift());
+    }
+  }
+
+  return ans;
+};
+
+const spiralOrder = (matrix) => {
+  let result = [];
+
+  let left = 0;
+  let up = 0;
+  let right = matrix[0].length - 1;
+  let down = matrix.length - 1;
+
+  while (result.length < matrix.length * matrix[0].length) {
+    for (let column = left; column < right + 1; column++) {
+      result.push(matrix[up][column]);
+    }
+
+    for (let row = up + 1; row < down + 1; row++) {
+      result.push(matrix[row][right]);
+    }
+
+    if (up !== down) {
+      for (let column = right - 1; column > left - 1; column--) {
+        result.push(matrix[down][column]);
+      }
+    }
+
+    if (left !== right) {
+      for (let row = down - 1; row > up; row--) {
+        result.push(matrix[row][left]);
+      }
+    }
+
+    left++;
+    up++;
+    right--;
+    down--;
+  }
+
+  return result;
+};
