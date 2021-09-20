@@ -555,11 +555,11 @@ UndergroundSystem.prototype.checkOut = function (id, stationName, t) {
   endTime = t;
   travelTime = endTime - startTime;
 
-  if (journey in this.trips) {
-    this.trips[journey]["totalTime"] += travelTime;
-    this.trips[journey]["totalTrips"]++;
+  if (`${startStation}-${endStation}` in this.trips) {
+    this.trips[`${startStation}-${endStation}`]["totalTime"] += travelTime;
+    this.trips[`${startStation}-${endStation}`]["totalTrips"]++;
   } else {
-    this.trips.journey = {
+    this.trips[`${startStation}-${endStation}`] = {
       totalTime: travelTime,
       totalTrips: 1,
     };
@@ -594,3 +594,31 @@ UndergroundSystem.prototype.getAverageTime = function (
  * obj.checkOut(id,stationName,t)
  * var param_3 = obj.getAverageTime(startStation,endStation)
  */
+
+//-------------------------------------------------------------------------
+//Remove All Adjacent Duplicates in String II (1209)
+
+const removeDuplicates = (s, k) => {
+  const stack = [];
+
+  for (let char of s) {
+    if (stack.length && stack[stack.length - 1][0] === char) {
+      stack[stack.length - 1][1]++;
+      if (stack[stack.length - 1][1] === k) {
+        stack.pop();
+      }
+    } else {
+      stack.push([char, 1]);
+    }
+  }
+
+  let result = "";
+
+  for (let [char, count] of stack) {
+    for (let i = 0; i < count; i++) {
+      result = result + char;
+    }
+  }
+
+  return result;
+};
