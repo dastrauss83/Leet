@@ -903,3 +903,47 @@ const generate = (numRows) => {
 
   return result;
 };
+
+//-------------------------------------------------------------------------
+//Maximum Nesting Depth of the Parentheses (1614)
+
+const maxDepth = (s) => {
+  let max = 0;
+  let current = 0;
+  for (let character of s) {
+    if (character === "(") current++;
+    if (character === ")") current--;
+    max = Math.max(current, max);
+  }
+
+  return max;
+};
+
+//-------------------------------------------------------------------------
+//Design an Ordered Stream (1656)
+
+const OrderedStream = (n) => {
+  this.pointer = 0;
+  this.list = [];
+};
+
+/**
+ * @param {number} idKey
+ * @param {string} value
+ * @return {string[]}
+ */
+OrderedStream.prototype.insert = (idKey, value) => {
+  let chunk = [];
+  this.list[idKey - 1] = value;
+  while (this.list[this.pointer]) {
+    chunk.push(this.list[this.pointer]);
+    this.pointer++;
+  }
+  return chunk;
+};
+
+/**
+ * Your OrderedStream object will be instantiated and called as such:
+ * var obj = new OrderedStream(n)
+ * var param_1 = obj.insert(idKey,value)
+ */
