@@ -707,3 +707,34 @@ const letterCombinations = (digits) => {
   // m = the number of digits that have 3 chars and n = the number of digits that have 4 chars
   // Space Complexity: O(3^m * 4^n), queue can contain at most O(3^m * 4^n) elements
 };
+
+const letterCombinations = (digits) => {
+  if (digits == null || digits.length === 0) return [];
+
+  const map = {
+    2: "abc",
+    3: "def",
+    4: "ghi",
+    5: "jkl",
+    6: "mno",
+    7: "pqrs",
+    8: "tuv",
+    9: "wxyz",
+  };
+
+  result = [];
+
+  const helper = (index, string) => {
+    if (index === digits.length) {
+      result.push(string);
+      return;
+    }
+
+    for (let character of map[digits[index]]) {
+      helper(index + 1, string + character);
+    }
+  };
+
+  helper(0, "");
+  return result;
+};
