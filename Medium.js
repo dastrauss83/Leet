@@ -882,3 +882,55 @@ const candyCrush = (board) => {
   if (isDone) return board;
   else return candyCrush(board);
 };
+
+//-------------------------------------------------------------------------
+//Flatten a Multilevel Doubly Linked List (430)
+
+const flatten = (head) => {
+  if (!head) return head;
+
+  let fakeHead = new Node(0, null, head, null);
+
+  const dfsFlatten = (prev, curr) => {
+    if (!curr) return prev;
+    curr.prev = prev;
+    prev.next = curr;
+
+    let tempNext = curr.next;
+    let tail = dfsFlatten(curr, curr.child);
+    curr.child = null;
+
+    return dfsFlatten(tail, tempNext);
+  };
+
+  dfsFlatten(fakeHead, head);
+
+  fakeHead.next.prev = null;
+  return fakeHead.next;
+};
+
+const flatten = (head) => {
+  if (!head) return head;
+
+  let fakeHead = new Node(0, null, head, null);
+  let prev = fakeHead;
+
+  let stack = [head];
+
+  while (stack.length) {
+    let curr = stack.pop();
+
+    prev.next = curr;
+    curr.prev = prev;
+
+    if (curr.next) stack.push(curr.next);
+    if (curr.child) {
+      stack.push(curr.child);
+      curr.child = null;
+    }
+
+    prev = curr;
+  }
+  fakeHead.next.prev = null;
+  return fakeHead.next;
+};
