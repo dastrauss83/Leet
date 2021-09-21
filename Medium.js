@@ -934,3 +934,27 @@ const flatten = (head) => {
   fakeHead.next.prev = null;
   return fakeHead.next;
 };
+
+//-------------------------------------------------------------------------
+//Two City Scheduling (1029)
+
+[
+  [30, 200], //-170
+  [10, 20], //-10
+  [30, 20], //10
+  [400, 50], //350
+];
+
+const twoCitySchedCost = (costs) => {
+  costs.sort((a, b) => a[0] - a[1] - (b[0] - b[1]));
+
+  let total = 0;
+
+  let half = costs.length / 2;
+
+  for (let i = 0; i < half; i++) {
+    total += costs[i][0] + costs[i + half][1];
+  }
+
+  return total;
+};
