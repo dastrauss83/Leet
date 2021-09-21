@@ -738,3 +738,90 @@ const letterCombinations = (digits) => {
   helper(0, "");
   return result;
 };
+
+//-------------------------------------------------------------------------
+//Number of Islands (200)
+
+const numIslands = (grid) => {
+  if (grid === null || grid.length === 0) return 0;
+
+  let numRow = grid.length;
+  let numCol = grid[0].length;
+  let numIslands = 0;
+
+  for (let row = 0; row < numRow; row++) {
+    for (let col = 0; col < numCol; col++) {
+      if (grid[row][col] === "1") {
+        numIslands++;
+        grid[row][col] = "0";
+
+        queue = [row * numCol + col];
+        while (queue.length) {
+          let current = queue.shift();
+
+          let newRow = Math.floor(current / numCol);
+          let newCol = current % numCol;
+
+          if (newRow - 1 >= 0 && grid[newRow - 1][newCol] === "1") {
+            queue.push((newRow - 1) * numCol + newCol);
+            grid[newRow - 1][newCol] = "0";
+          }
+
+          if (newRow + 1 < numRow && grid[newRow + 1][newCol] === "1") {
+            queue.push((newRow + 1) * numCol + newCol);
+            grid[newRow + 1][newCol] = "0";
+          }
+
+          if (newCol - 1 >= 0 && grid[newRow][newCol - 1] === "1") {
+            queue.push(newRow * numCol + newCol - 1);
+            grid[newRow][newCol - 1] = "0";
+          }
+
+          if (newCol + 1 < numCol && grid[newRow][newCol + 1] === "1") {
+            queue.push(newRow * numCol + newCol + 1);
+            grid[newRow][newCol + 1] = "0";
+          }
+        }
+      }
+    }
+  }
+
+  return numIslands;
+};
+
+const numIslands = (grid) => {
+  let numRow = grid.length;
+  let numCol = grid[0].length;
+  let numIslands = 0;
+
+  const dfsHelper = (grid, row, col) => {
+    let numRow = grid.length;
+    let numCol = grid[0].length;
+
+    if (
+      row < 0 ||
+      col < 0 ||
+      row >= numRow ||
+      col >= numCol ||
+      grid[row][col] === "0"
+    )
+      return;
+
+    grid[row][col] = "0";
+    dfsHelper(grid, row + 1, col);
+    dfsHelper(grid, row - 1, col);
+    dfsHelper(grid, row, col + 1);
+    dfsHelper(grid, row, col - 1);
+  };
+
+  for (let row = 0; row < numRow; row++) {
+    for (let col = 0; col < numCol; col++) {
+      if (grid[row][col] === "1") {
+        numIslands++;
+        dfsHelper(grid, row, col);
+      }
+    }
+  }
+
+  return numIslands;
+};
