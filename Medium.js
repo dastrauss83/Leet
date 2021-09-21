@@ -153,7 +153,6 @@ const merge = (intervals) => {
       );
     }
   }
-
   return answer;
 };
 
