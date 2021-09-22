@@ -1014,4 +1014,58 @@ BrowserHistory.prototype.forward = function (steps) {
 //-------------------------------------------------------------------------
 //Meeting Rooms II (253)
 
-const minMeetingRooms = (intervals) => {};
+Input: intervals = [
+  [0, 30],
+  [5, 10],
+  [15, 20],
+];
+Output: 2;
+
+Input: intervals = [
+  [2, 4],
+  [7, 10],
+];
+Output: 1;
+
+[
+  [4, 9],
+  [4, 17],
+  [9, 10],
+];
+
+const minMeetingRooms = (intervals) => {
+  if (!intervals.length) return 0;
+
+  const starts = intervals.map((a) => a[0]).sort((a, b) => a - b);
+  const ends = intervals.map((a) => a[1]).sort((a, b) => a - b);
+
+  let count = 0;
+  let end = 0;
+
+  for (let i = 0; i < intervals.length; i++) {
+    if (starts[i] < ends[end]) count++;
+    else end++;
+  }
+
+  return count;
+};
+
+const minMeetingRooms = (intervals) => {
+  if (!intervals.length) return 0;
+
+  let count = 0;
+
+  intervals.sort((a, b) => a[0] - b[0]);
+  const list = [];
+
+  for (let i = 0; i < intervals.length; i++) {
+    while (list.length && intervals[i][0] >= list[0]) list.shift();
+
+    list.push(intervals[i][1]);
+    list.sort((a, b) => a - b);
+
+    count = Math.max(count, list.length);
+  }
+
+  return count;
+};
