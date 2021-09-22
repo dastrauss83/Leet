@@ -1014,25 +1014,6 @@ BrowserHistory.prototype.forward = function (steps) {
 //-------------------------------------------------------------------------
 //Meeting Rooms II (253)
 
-Input: intervals = [
-  [0, 30],
-  [5, 10],
-  [15, 20],
-];
-Output: 2;
-
-Input: intervals = [
-  [2, 4],
-  [7, 10],
-];
-Output: 1;
-
-[
-  [4, 9],
-  [4, 17],
-  [9, 10],
-];
-
 const minMeetingRooms = (intervals) => {
   if (!intervals.length) return 0;
 
