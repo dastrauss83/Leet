@@ -1050,3 +1050,77 @@ const minMeetingRooms = (intervals) => {
 
   return count;
 };
+
+//-------------------------------------------------------------------------
+//Count Unhappy Friends (1583)
+
+const unhappyFriends = (n, preferences, pairs) => {
+  let happyMap = [];
+
+  for (let [i, j] of pairs) {
+    happyMap[i] = preferences[i].indexOf(j);
+    happyMap[j] = preferences[j].indexOf(i);
+  }
+
+  console.log(happyMap);
+
+  let count = 0;
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < happyMap[i]; j++) {
+      let partner = preferences[i][j];
+      if (preferences[partner].indexOf(i) < happyMap[partner]) {
+        count++;
+        break;
+      }
+    }
+  }
+
+  return count;
+};
+
+//-------------------------------------------------------------------------
+//All Paths From Source to Target (797)
+
+const allPathsSourceTarget = (graph) => {
+  const target = graph.length - 1;
+  let result = [];
+
+  const dfs = (index, path) => {
+    if (path[path.length - 1] === target) {
+      result.push(path);
+      return;
+    }
+
+    for (let node of graph[index]) {
+      dfs(node, [...path, node]);
+    }
+  };
+
+  dfs(0, [0]);
+
+  return result;
+};
+
+const allPathsSourceTarget = (graph) => {
+  const target = graph.length - 1;
+  let result = [];
+
+  let stack = [[0, []]];
+
+  while (stack.length) {
+    let [node, path] = stack.pop();
+
+    path.push(node);
+
+    if (node === target) {
+      result.push(path);
+    }
+
+    for (let adjNode of graph[node]) {
+      stack.push([adjNode, [...path]]);
+    }
+  }
+
+  return result;
+};
