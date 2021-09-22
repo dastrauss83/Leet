@@ -951,3 +951,6 @@ const twoCitySchedCost = (costs) => {
 
   return total;
 };
+
+//-------------------------------------------------------------------------
+//Design Browser History (1472)
