@@ -947,3 +947,19 @@ OrderedStream.prototype.insert = (idKey, value) => {
  * var obj = new OrderedStream(n)
  * var param_1 = obj.insert(idKey,value)
  */
+
+//-------------------------------------------------------------------------
+//Contains Duplicate (217)
+
+const containsDuplicate = (nums) => {
+  if (nums.length < 2) return false;
+
+  const map = {};
+
+  for (let num of nums) {
+    if (num in map) return true;
+    else map[num] = true;
+  }
+
+  return false;
+};
