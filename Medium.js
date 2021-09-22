@@ -1010,3 +1010,8 @@ BrowserHistory.prototype.forward = function (steps) {
  * var param_2 = obj.back(steps)
  * var param_3 = obj.forward(steps)
  */
+
+//-------------------------------------------------------------------------
+//Meeting Rooms II (253)
+
+const minMeetingRooms = (intervals) => {};
