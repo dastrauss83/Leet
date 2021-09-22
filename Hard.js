@@ -27,6 +27,7 @@ const superEggDrop = (eggs, floors) => {
 
 //-------------------------------------------------------------------------
 //Median of Two Sorted Arrays (4)
+
 const findMedianSortedArrays = (nums1, nums2) => {
   let array = nums1.concat(nums2).sort((a, b) => a - b);
   if (array.length % 2 === 1) {
@@ -73,4 +74,42 @@ const findMedianSortedArrays = (nums1, nums2) => {
       start = xPartition + 1;
     }
   }
+};
+
+//-------------------------------------------------------------------------
+//Number of Ships in a Rectangle (1274)
+
+const countShips = (sea, topRight, bottomLeft) => {
+  let numShips = 0;
+  const stack = [[topRight, bottomLeft]];
+
+  while (stack.length) {
+    const [tR, bL] = stack.pop();
+
+    if (!sea.hasShips(tR, bL)) continue;
+
+    const [right, top] = tR;
+    const [left, bottom] = bL;
+
+    if (right === left && top === bottom) {
+      numShips++;
+      continue;
+    }
+
+    const newX = Math.floor((right + left) / 2);
+    const newY = Math.floor((top + bottom) / 2);
+
+    stack.push([tR, [newX + 1, newY + 1]]);
+    stack.push([
+      [newX, top],
+      [left, newY + 1],
+    ]);
+    stack.push([[newX, newY], bL]);
+    stack.push([
+      [right, newY],
+      [newX + 1, bottom],
+    ]);
+  }
+
+  return numShips;
 };
