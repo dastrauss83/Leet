@@ -1041,4 +1041,12 @@ const isAlienSorted = (words, sorted) => {
 //-------------------------------------------------------------------------
 //Sign of the Product of an Array (1822)
 
-const arraySign = (nums) => {};
+const arraySign = (nums) => {
+  let answer = 0;
+  for (let num of nums) {
+    if (num === 0) return 0;
+    if (num < 0) answer++;
+  }
+  if (answer === 0) return 1;
+  return answer % 2 === 1 ? -1 : 1;
+};
