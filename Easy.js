@@ -1050,3 +1050,33 @@ const arraySign = (nums) => {
   if (answer === 0) return 1;
   return answer % 2 === 1 ? -1 : 1;
 };
+
+//-------------------------------------------------------------------------
+//Add Strings (415)
+
+const addStrings = (num1, num2) => {
+  let i = num1.length - 1;
+  let j = num2.length - 1;
+  let result = "";
+  let carry = 0;
+
+  while (i >= 0 || j >= 0) {
+    const digit1 = i < 0 ? 0 : num1[i] - "0";
+    const digit2 = j < 0 ? 0 : num2[j] - "0";
+
+    let sum = digit1 + digit2 + carry;
+    carry = 0;
+
+    if (sum > 9) {
+      carry = 1;
+      sum = sum % 10;
+    }
+
+    result = `${String(sum)}${result}`;
+
+    i--;
+    j--;
+  }
+  if (carry > 0) return `${String(carry)}${result}`;
+  return result;
+};
