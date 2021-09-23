@@ -1037,3 +1037,8 @@ const isAlienSorted = (words, sorted) => {
   }
   return true;
 };
+
+//-------------------------------------------------------------------------
+//Sign of the Product of an Array (1822)
+
+const arraySign = (nums) => {};
