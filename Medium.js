@@ -761,7 +761,7 @@ const numIslands = (grid) => {
           let newRow = Math.floor(current / numCol);
           let newCol = current % numCol;
 
-          if (newRow - 1 >= 0 && grid[newRow - 1][newCol] === "1") {
+          if (newRow - 1 > -1 && grid[newRow - 1][newCol] === "1") {
             queue.push((newRow - 1) * numCol + newCol);
             grid[newRow - 1][newCol] = "0";
           }
@@ -771,7 +771,7 @@ const numIslands = (grid) => {
             grid[newRow + 1][newCol] = "0";
           }
 
-          if (newCol - 1 >= 0 && grid[newRow][newCol - 1] === "1") {
+          if (newCol - 1 > -1 && grid[newRow][newCol - 1] === "1") {
             queue.push(newRow * numCol + newCol - 1);
             grid[newRow][newCol - 1] = "0";
           }
