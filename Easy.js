@@ -1018,7 +1018,22 @@ const reorderLogFiles = (logs) => {
 
 const isAlienSorted = (words, sorted) => {
   for (let i = 0; i < words.length - 1; i++) {
-    if (sorted.indexOf(words[i]) > sorted.indexOf(words[i + 1])) return false;
+    if (sorted.indexOf(words[i][0]) > sorted.indexOf(words[i + 1][0]))
+      return false;
+    if (sorted.indexOf(words[i][0]) === sorted.indexOf(words[i + 1][0])) {
+      let index = 1;
+      while (index <= words[i].length) {
+        if (
+          sorted.indexOf(words[i][index]) > sorted.indexOf(words[i + 1][index])
+        )
+          return false;
+        if (
+          sorted.indexOf(words[i][index]) < sorted.indexOf(words[i + 1][index])
+        )
+          break;
+        index++;
+      }
+    }
   }
   return true;
 };
