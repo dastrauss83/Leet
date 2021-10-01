@@ -1080,3 +1080,13 @@ const addStrings = (num1, num2) => {
   if (carry > 0) return `${String(carry)}${result}`;
   return result;
 };
+
+//-------------------------------------------------------------------------
+//Best Time to Buy and Sell Stock (121)
+
+const maxProfit = (prices) => {
+  let max = 0;
+  let min = prices[0];
+
+  for (let i = 1; i < prices.length; i++) {}
+};
