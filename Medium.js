@@ -1135,5 +1135,7 @@ const isRobotBounded = (instructions) => {
     [0, -1],
     [-1, 0],
   ];
-  let x = (y = 0);
+  let x = 0,
+    y = 0,
+    i = 0;
 };
