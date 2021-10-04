@@ -1138,4 +1138,13 @@ const isRobotBounded = (instructions) => {
   let x = 0,
     y = 0,
     i = 0;
+  for (let instruction of instructions) {
+    if (instruction === "R") i = (i + 1) % 4;
+    else if (instruction === "L") i = (i + 3) % 4;
+    else {
+      x += directions[i][0];
+      y += directions[i][1];
+    }
+  }
+  return (x === 0 && y === 0) || i > 0;
 };
