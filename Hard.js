@@ -123,11 +123,11 @@ const trap = (height) => {
   for (let i = 0; i < height.length; i++) {
     let left = 0;
     for (let j = i; j >= 0; j--) {
-      left = Max.math(left, height[j]);
+      left = Math.max(left, height[j]);
     }
     let right = 0;
     for (let j = i; j < height.length; j++) {
-      right = Max.math(right, height[j]);
+      right = Math.max(right, height[j]);
     }
     ans += Math.min(left, right) - height[i];
   }
