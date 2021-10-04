@@ -144,10 +144,9 @@ const trap = (height) => {
       let top = stack.pop();
       if (!stack.length) break;
       let distance = current - stack[stack.length - 1] - 1;
-      let boundHeight = Math.min(
-        height[current],
-        height[stack[stack.length - 1]] - height[top]
-      );
+      let boundHeight =
+        Math.min(height[current], height[stack[stack.length - 1]]) -
+        height[top];
       ans += distance * boundHeight;
     }
     stack.push(current++);
