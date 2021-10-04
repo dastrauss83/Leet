@@ -1124,3 +1124,16 @@ const allPathsSourceTarget = (graph) => {
 
   return result;
 };
+
+//-------------------------------------------------------------------------
+//Robot Bounded In Circle (1041)
+
+const isRobotBounded = (instructions) => {
+  const directions = [
+    [0, 1],
+    [1, 0],
+    [0, -1],
+    [-1, 0],
+  ];
+  let x = (y = 0);
+};
