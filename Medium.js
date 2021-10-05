@@ -102,7 +102,6 @@ const lengthOfLongestSubstring = (s) => {
   return max;
 };
 
-//JS heavy
 const lengthOfLongestSubstring = (s) => {
   let curr = [];
   let max = 0;
