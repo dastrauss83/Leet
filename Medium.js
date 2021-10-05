@@ -794,9 +794,6 @@ const numIslands = (grid) => {
   let numIslands = 0;
 
   const dfsHelper = (grid, row, col) => {
-    let numRow = grid.length;
-    let numCol = grid[0].length;
-
     if (
       row < 0 ||
       col < 0 ||
