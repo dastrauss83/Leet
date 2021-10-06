@@ -1111,16 +1111,19 @@ const fizzBuzz = (n) => {
   return ans;
 };
 
+//-------------------------------------------------------------------------
+//Maximum Units on a Truck (1710)
+
 const maximumUnits = (boxTypes, truckSize) => {
   boxTypes.sort((a, b) => b[1] - a[1]);
 
   let units = 0;
   for (let i = 0; i < boxTypes.length; i++) {
-    while (truckSize > 0 && boxTypes[i][0] > 0) {
-      units += boxTypes[i][1];
-      truckSize--;
-      boxTypes[i][0]--;
-    }
+    let boxCount = Math.min(truckSize, boxTypes[i][0]);
+
+    units += boxCount * boxTypes[i][1];
+    truckSize -= boxCount;
+    if (!truckSize) break;
   }
 
   return units;
