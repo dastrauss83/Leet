@@ -1110,3 +1110,18 @@ const fizzBuzz = (n) => {
   }
   return ans;
 };
+
+const maximumUnits = (boxTypes, truckSize) => {
+  boxTypes.sort((a, b) => b[1] - a[1]);
+
+  let units = 0;
+  for (let i = 0; i < boxTypes.length; i++) {
+    while (truckSize > 0 && boxTypes[i][0] > 0) {
+      units += boxTypes[i][1];
+      truckSize--;
+      boxTypes[i][0]--;
+    }
+  }
+
+  return units;
+};
