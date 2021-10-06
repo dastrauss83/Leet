@@ -1098,6 +1098,7 @@ const maxProfit = (prices) => {
 
 //-------------------------------------------------------------------------
 //FizzBuzz (412)
+
 const fizzBuzz = (n) => {
   let ans = [];
   for (let i = 1; i <= n; i++) {
