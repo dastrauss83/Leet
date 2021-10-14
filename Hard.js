@@ -134,6 +134,7 @@ const trap = (height) => {
 
   return ans;
 };
+
 const trap = (height) => {
   let ans = 0;
   let current = 0;
