@@ -113,7 +113,6 @@ const countShips = (sea, topRight, bottomLeft) => {
 
   return numShips;
 };
-
 //-------------------------------------------------------------------------
 //Trapping Rain Water (42)
 
