@@ -116,7 +116,6 @@ const countShips = (sea, topRight, bottomLeft) => {
 
 //-------------------------------------------------------------------------
 //Trapping Rain Water (42)
-
 const trap = (height) => {
   let ans = 0;
 
